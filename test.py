@@ -6,5 +6,3 @@ contenido = respuesta.content.decode("utf-8")
 
 print(contenido)
 print(respuesta)
-
-45:27 ni
