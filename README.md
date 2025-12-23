@@ -595,3 +595,150 @@ Respuesta:
 ```
 
 [httpdebugger](https://www.httpdebugger.com/tools/viewhttpheaders.aspx)
+
+# Estructura de directorios
+
+A continuación presento una **explicación clara y paso a paso de cómo se crea el “árbol” (estructura de directorios) de un proyecto Django**, desde cero.
+
+## 1. Crear el entorno virtual (recomendado)
+
+Antes de crear el proyecto, se aísla el entorno de Python:
+
+```bash
+python -m venv venv
+```
+
+Activar:
+
+* **Windows**
+
+```bash
+venv\Scripts\activate
+```
+
+* **Linux / macOS**
+
+```bash
+source venv/bin/activate
+```
+
+## 2. Instalar Django
+
+Con el entorno virtual activo:
+
+```bash
+pip install django
+```
+
+## 3. Crear el proyecto Django
+
+Este comando **crea el árbol inicial del proyecto**:
+
+```bash
+django-admin startproject tienda_videojuegos
+```
+
+Estructura generada:
+
+```
+tienda_videojuegos/
+├── manage.py
+└── tienda_videojuegos/
+    ├── __init__.py
+    ├── asgi.py
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+```
+
+## 4. Explicación del árbol inicial
+
+### `manage.py`
+
+* Punto de entrada del proyecto
+* Ejecuta comandos como `runserver`, `migrate`, `createsuperuser`
+
+### Carpeta del proyecto (`tienda_videojuegos/` interna)
+
+> Esta carpeta tiene el mismo nombre del proyecto, pero **contiene la configuración principal**.
+
+#### `settings.py`
+
+* Configuración global del proyecto
+* Apps, base de datos, idioma, zona horaria
+
+#### `urls.py`
+
+* Enrutador principal de URLs
+
+#### `wsgi.py`
+
+* Configuración para servidores tradicionales (Gunicorn, uWSGI)
+
+#### `asgi.py`
+
+* Configuración para aplicaciones asíncronas (WebSockets)
+
+#### `__init__.py`
+
+* Indica que es un paquete Python
+
+## 5. Crear una aplicación Django
+
+Dentro del proyecto, se crean **apps** para separar funcionalidades:
+
+```bash
+python manage.py startapp productos
+```
+
+Nuevo árbol:
+
+```
+productos/
+├── admin.py
+├── apps.py
+├── models.py
+├── tests.py
+├── views.py
+└── migrations/
+    └── __init__.py
+```
+
+## 6. Relación proyecto vs aplicación
+
+| Proyecto              | Aplicación               |
+| --------------------- | ------------------------ |
+| Configuración general | Funcionalidad específica |
+| URLs principales      | Lógica de negocio        |
+| Base de datos         | Modelos                  |
+
+Ejemplo:
+
+* Proyecto: `tienda_videojuegos`
+* Apps: `productos`, `usuarios`, `pedidos`
+
+## 7. Árbol típico de un proyecto Django real
+
+```
+tienda_videojuegos/
+├── venv/
+├── manage.py
+├── tienda_videojuegos/
+│   ├── settings.py
+│   ├── urls.py
+│   └── ...
+├── productos/
+├── usuarios/
+├── templates/
+├── static/
+└── requirements.txt
+```
+
+## 8. Buenas prácticas
+
+* Usar **entorno virtual**
+* Separar funcionalidades en apps
+* Mantener `settings.py` organizado
+* Crear carpetas `templates/` y `static/`
+
+1:50:41
