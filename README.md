@@ -741,4 +741,13 @@ tienda_videojuegos/
 * Mantener `settings.py` organizado
 * Crear carpetas `templates/` y `static/`
 
-1:50:41
+
+agragar bootstrap 
+
+ link [https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css](https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css)
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+```
+
+# 2:00:00

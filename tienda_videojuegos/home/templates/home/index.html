@@ -1,16 +1,24 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda de Videojuegos</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script scr="{% static 'js/script.js' %}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+
 </head>
 <body>
     <h1>Bienvenidos a la tienda de videojuegos</h1>
     <p>Explora nuestro catálogo y disfruta</p>
 
+    <img src="{% static 'img/logo.png' %}" alt="Logo">
+
     <footer>
-        <p>&copy; © 2025 Tienda de Videojuegos</p>
+        <p>&copy; 2025 Tienda de Videojuegos</p>
         <a href="{% url 'contacto' %}">Contacto</a>
     </footer>
 </body>
