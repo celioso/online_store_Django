@@ -750,4 +750,60 @@ agragar bootstrap
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 ```
 
-# 2:00:00
+Ejemplo de promp para que chatgpt me genere el bloque
+
+ejemplo
+
+Quiero que me ges el codigo html para un bloque content de django Para un formulario de contacto que tenga campo nombre completo, direccion de correo electronico, telefono y el mensaje de contacto
+
+Devera tener un boton para enviar y un titulo arriba que ponge contactenos, con un subtitulo de color gris, con letras mas pequeñas que ponga mensaje relacionado.
+
+Los estilos deben ser de bootstrap(ya tengo la hoja enlazada, de modo que no me la porporciones) y debe ser completamente responsiva.
+
+codigo que me genero
+
+```html
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+
+            <h2 class="text-center mb-1">Contáctenos</h2>
+            <p class="text-center text-muted mb-4">mensaje relacionado</p>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre completo</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="telefono" class="form-label">Teléfono</label>
+                    <input type="tel" class="form-control" id="telefono" name="telefono">
+                </div>
+
+                <div class="mb-3">
+                    <label for="mensaje" class="form-label">Mensaje</label>
+                    <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required></textarea>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">
+                        Enviar mensaje
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
+```
+# 2:15:02

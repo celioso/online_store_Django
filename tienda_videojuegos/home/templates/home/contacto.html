@@ -1,22 +1,17 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto - Tienda de Videojuegos</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <script scr="{% static 'js/script.js' %}"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-</head>
-<body>
-    <h1>Contacto</h1>
-    <p>Envía un correo a contacto@tiendavideojuegos.com</p>
-    
-    <footer>
-        <p>&copy; 2025 Tienda de Videojuegos</p>
-        <a href="{% url 'home' %}">Contacto</a>
-    </footer>
-</body>
-</html>
+{% block title %}Contacto - Tienda de videojuegos{% endblock %}
+
+{% block content %}
+<div class="conteiner mt-5">
+    <h1 class="text-light">Contacto</h1>
+    <p class="text-light">Envía un correo a <a class="text-light" href="mailto:contacto@tiendavideojuegos.com">contacto@tiendavideojuegos.com</a></p>
+
+
+    <div class="alert alert-primary">¡Nuevo colección de Videojuegos disponibles esta semana!</div>
+    <div class="alert alert-warning">Recuerda revisar las restricciones de edad para algunos titulos.</div>
+    <div class="alert alert-danger">Algunos productos tienen stock limitado, ¡apresúrate!</div>
+</div>
+
+{% endblock content %}
