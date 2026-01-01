@@ -808,3 +808,53 @@ codigo que me genero
 ```
 
 [fontawesome](https://fontawesome.com/search)
+
+# <header>
+
+En **HTML**, **`<header>`** es una **etiqueta semántica** que se utiliza para definir el **encabezado** de una página web o de una sección específica.
+
+### ¿Para qué sirve `<header>`?
+
+Se usa para agrupar contenido introductorio o de navegación, como:
+
+* Logotipo o nombre del sitio
+* Títulos (`<h1>` a `<h6>`)
+* Menús de navegación
+* Iconos o botones principales
+
+### Ejemplo básico
+
+```html
+<header>
+  <h1>Mi sitio web</h1>
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#">Servicios</a>
+    <a href="#">Contacto</a>
+  </nav>
+</header>
+```
+
+### Características importantes
+
+* Puede existir **más de un `<header>`** en una página.
+* Puede estar dentro de:
+
+  * `<body>`
+  * `<section>`
+  * `<article>`
+* **No** debe colocarse dentro de `<footer>`, `<address>` u otro `<header>`.
+
+### Diferencia con `<head>`
+
+| `<head>`        | `<header>`            |
+| --------------- | --------------------- |
+| Metadatos       | Contenido visible     |
+| No visible      | Visible al usuario    |
+| Título, CSS, JS | Títulos, menús, logos |
+
+### Ventajas
+
+* Mejora la **accesibilidad**
+* Mejora el **SEO**
+* Hace el código más claro y mantenible
