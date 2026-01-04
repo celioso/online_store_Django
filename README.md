@@ -1,4 +1,4 @@
-# tienda
+7 # tienda
 
 ## MVC
 
@@ -857,4 +857,4 @@ Se usa para agrupar contenido introductorio o de navegación, como:
 
 * Mejora la **accesibilidad**
 * Mejora el **SEO**
-* Hace el código más claro y mantenible
+* Hace el código más claro y *mantenible*
