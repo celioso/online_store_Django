@@ -18,24 +18,56 @@
 </head>
 <body class="bg-body test-body">
 <header class="d-flex justify-content-between align-items-center p-3 border-bottom">
-    <button
-        id="toggle-theme"
-        class="btn btn-outline-secondary d-flex align-items-center gap-2"
-        aria-label="Cambiar tema"
-        title="Cambiar tema">
-        <i class="fa-solid fa-circle-half-stroke"></i>
-        
-    </button>
+    <nav class="navbar navbar-extend-lg navbar-dark position-relative">
+        <div class="container d-flex justify-content-between aling-items-center">
+            <!-- Boton modo oscuro -->
+            <button
+                id="toggle-theme"
+                class="btn btn-outline-secondary d-flex align-items-center gap-2"
+                aria-label="Cambiar tema"
+                title="Cambiar tema">
+                <i class="fa-solid fa-circle-half-stroke"></i>                  
+            </button>
+            <!--Logo-->
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}" >
+                <img src="{% static 'img/logo.png' %}" alt="Videoiugos Logo" style="max-height:40px;">
+                <span class="fw-bold text-white">Videoiugos</span>
+            </a>
+            <!-- Botones a la derecha (modo oscuro + toggle) -->
+            <div class="d-flex align-items-center">
+                <!-- Botón toggle para móviles -->
+                <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPF"
+                        aria-controls="navbarPF" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <!-- Contenido colapsable -->
+        <div class="collapse navbar-collapse" id="navbarPF">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Tienda</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Noticias</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
+            </ul>
+            <!-- Formulario de búsqueda -->
+        <form class="d-flex me-3" role="search">
+            <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
+            <button class="btn btn-outline-info" type="submit">Buscar</button>
+        </form>
+        </div>
+        </div>
+    </nav>
 </header>
+<main>
     {% block content %}
-    
+        
     {% endblock %}
-
-    <footer class="text-center mt-5 mb-3">
+</main>
+<footer class="text-center mt-5 mb-3">
         <p>&copy; 2025 Tienda de Videoiuegos</p>
         <a href="{% url 'home' %}" class="text-body">Inicio</a>
         <a href="{% url 'contacto' %}" class="text-body" ms-3>Contacto</a>
-    </footer>
+</footer>
 <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
