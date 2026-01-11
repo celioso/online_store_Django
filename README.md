@@ -752,7 +752,7 @@ agragar bootstrap
 
 Ejemplo de promp para que chatgpt me genere el bloque
 
-ejemplo
+**ejemplo**
 
 Quiero que me ges el codigo html para un bloque content de django Para un formulario de contacto que tenga campo nombre completo, direccion de correo electronico, telefono y el mensaje de contacto
 
