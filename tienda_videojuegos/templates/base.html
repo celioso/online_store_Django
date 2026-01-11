@@ -58,12 +58,39 @@
         </div>
     </nav>
 </header>
-<main>
-    {% block content %}
-        
-    {% endblock %}
+<main class="py-5 bg-body-secundary text-center text-dark">
+    <div class="container">
+        {% block content %}
+        <h1 class="text-dody">Tu tienda de confianza con precios más altos, pero de confianza.</h1>
+        {% endblock %}
+    </div>
 </main>
-<footer class="text-center mt-5 mb-3">
+<!-- FOOTER GLOBAL -->
+<footer class="bg-dark text-white pt-4 pb-2 mt-5">
+    <div class="container">
+        <div class="row  small">
+            <!-- Sobre nosotros -->
+            <div class="col-md-4 md-3">
+                <h6 class="text-uppercase">Sobre nosotros</h6>
+                <p class="mb-1">ideoiuegos es tu tienda de confianza, compra fácil, barato y con el mejor servicio técnico.</p>  
+            </div>
+            <!-- Enlace útiles -->
+            <div class="col-md-4 mb-3">
+                <h6 class="text-uppercase">Enlaces útiles</h6>
+                <ul class="">
+                    <li><a href="{% url 'home' %}" class="text-white-50 text-decoration-none">Inicio</a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                    <li><a href="#"></a></li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+
+
         <p>&copy; 2025 Tienda de Videoiuegos</p>
         <a href="{% url 'home' %}" class="text-body">Inicio</a>
         <a href="{% url 'contacto' %}" class="text-body" ms-3>Contacto</a>
