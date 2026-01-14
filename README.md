@@ -1,4 +1,4 @@
-7 # tienda
+# tienda
 
 ## MVC
 
@@ -6,7 +6,7 @@ MVC significa **Model–View–Controller** y es un **patrón de arquitectura de
 
 ## ¿Qué es MVC?
 
-MVC separa una aplicación en **tres responsabilidades bien definidas**:
+**MVC** separa una aplicación en **tres responsabilidades bien definidas**:
 
 | Componente     | Responsabilidad                     |
 | -------------- | ----------------------------------- |
