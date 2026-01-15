@@ -758,7 +758,7 @@ Quiero que me ges el codigo html para un bloque content de django Para un formul
 
 Devera tener un boton para enviar y un titulo arriba que ponge contactenos, con un subtitulo de color gris, con letras mas pequeñas que ponga mensaje relacionado.
 
-Los estilos deben ser de bootstrap(ya tengo la hoja enlazada, de modo que no me la porporciones) y debe ser completamente responsiva.
+Los estilos deben ser de **bootstrap**(ya tengo la hoja enlazada, de modo que no me la porporciones) y debe ser completamente responsiva.
 
 codigo que me genero
 
