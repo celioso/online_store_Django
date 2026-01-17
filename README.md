@@ -247,7 +247,7 @@ HTTP sigue un modelo **cliente–servidor** y opera mediante un esquema de **pet
 Ejemplo simple:
 
 * El navegador solicita una página web.
-* El servidor responde con el HTML de esa página.
+* El servidor responde con el **HTML** de esa página.
 
 ## Métodos HTTP (Verbos)
 
