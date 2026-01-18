@@ -2,7 +2,7 @@
 
 ## MVC
 
-MVC significa **Model–View–Controller** y es un **patrón de arquitectura de software** muy utilizado para organizar aplicaciones, especialmente en **web, backend y aplicaciones de escritorio**. A continuación te lo explico de forma **clara, estructurada y práctica**, con un ejemplo en **Python**, alineado con tu perfil técnico.
+*MVC* significa **Model–View–Controller** y es un **patrón de arquitectura de software** muy utilizado para organizar aplicaciones, especialmente en **web, backend y aplicaciones de escritorio**. A continuación te lo explico de forma **clara, estructurada y práctica**, con un ejemplo en *Python*, alineado con tu perfil técnico.
 
 ## ¿Qué es MVC?
 
@@ -247,7 +247,7 @@ HTTP sigue un modelo **cliente–servidor** y opera mediante un esquema de **pet
 Ejemplo simple:
 
 * El navegador solicita una página web.
-* El servidor responde con el HTML de esa página.
+* El servidor responde con el **HTML** de esa página.
 
 ## Métodos HTTP (Verbos)
 
@@ -758,7 +758,7 @@ Quiero que me ges el codigo html para un bloque content de django Para un formul
 
 Devera tener un boton para enviar y un titulo arriba que ponge contactenos, con un subtitulo de color gris, con letras mas pequeñas que ponga mensaje relacionado.
 
-Los estilos deben ser de bootstrap(ya tengo la hoja enlazada, de modo que no me la porporciones) y debe ser completamente responsiva.
+Los estilos deben ser de **bootstrap**(ya tengo la hoja enlazada, de modo que no me la porporciones) y debe ser completamente responsiva.
 
 codigo que me genero
 
