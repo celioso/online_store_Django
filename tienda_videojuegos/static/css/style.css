@@ -1,0 +1,74 @@
+/* ===============================
+   VARIABLES (opcional)
+================================ */
+:root {
+    --brand-shadow: 2px 2px 5px #000;
+}
+
+/* ===============================
+    BODY
+================================ */
+body {
+    position: relative;
+}
+
+/* ===============================
+    NAVBAR
+================================ */
+.navbar-logo img{
+    height: 50px;
+    width: auto;
+}
+
+
+.navbar-title {
+    font-size: 1.2rem;
+    text-shadow: var(--brand-shadow);
+}
+
+/* Botón modo oscuro */
+.btn-theme-toggle {
+    width: 45px;
+    height: 45px;
+}
+
+/* ===============================
+    MAIN
+================================ */
+main {
+    text-align: center;
+}
+
+/* ===============================
+    FOOTER
+================================ */
+footer h6 {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+footer ul {
+    padding-left: 0;
+}
+
+footer ul li {
+    margin-bottom: 0.4rem;
+}
+
+/* Línea separadora del copyright */
+footer hr {
+    opacity: 0.25;
+}
+
+/* Texto copyright */
+footer p {
+    margin-bottom: 0;
+}
+
+/* ===============================
+    LINKS
+================================ */
+footer a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
