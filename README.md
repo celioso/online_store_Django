@@ -811,7 +811,7 @@ codigo que me genero
 
 # <header>
 
-En **HTML**, **`<header>`** es una **etiqueta semántica** que se utiliza para definir el **encabezado** de una página web o de una sección específica.
+En HTML, **`<header>`** es una **etiqueta semántica** que se utiliza para definir el **encabezado** de una página web o de una sección específica.
 
 ### ¿Para qué sirve `<header>`?
 
