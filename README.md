@@ -2,7 +2,7 @@
 
 ## MVC
 
-*MVC* significa **Model–View–Controller** y es un **patrón de arquitectura de software** muy utilizado para organizar aplicaciones, especialmente en **web, backend y aplicaciones de escritorio**. A continuación te lo explico de forma **clara, estructurada y práctica**, con un ejemplo en *Python*, alineado con tu perfil técnico.
+*MVC* significa **Model–View–Controller** y es un **patrón de arquitectura de software** muy utilizado para organizar aplicaciones, especialmente en **web, backend y aplicaciones de escritorio**. A continuación te lo explico de forma clara, estructurada y práctica, con un ejemplo en *Python*, alineado con tu perfil técnico.
 
 ## ¿Qué es MVC?
 
