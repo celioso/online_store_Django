@@ -116,7 +116,7 @@ create_user("Mario", "mario@email.com")
 ## Ventajas de MVC
 
 * Código más **ordenado y mantenible**
-* Facilita **pruebas unitarias**
+* Facilita *pruebas unitarias*
 * Escalabilidad
 * Separación clara de responsabilidades
 
