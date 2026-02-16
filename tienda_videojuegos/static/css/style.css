@@ -10,6 +10,8 @@
 ================================ */
 body {
     position: relative;
+    padding-top: 120px;
+    
 }
 
 /* ===============================
@@ -37,6 +39,7 @@ body {
 ================================ */
 main {
     text-align: center;
+    
 }
 
 /* ===============================
@@ -71,4 +74,16 @@ footer p {
 footer a:hover {
     color: #ffffff;
     text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    main {
+        margin-top: 110px;
+    }
+}
+
+@media (min-width: 769px) {
+    main {
+        margin-top: 90px;
+    }
 }

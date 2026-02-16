@@ -1,0 +1,25 @@
+{% extends "base.html" }
+
+{% load static %}
+
+{% block title %}Tienda de Juegos{% endblock %}
+
+{% block content %}
+    <h2>Lista de Juegos<h2/>
+    <div class= "row row-cols-1 row-cols-md-3 g-4 mt-3">
+        {% for juegos in lista_juegos %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{% static 'img/logo.png' %}" class= "card-img-top" alt="Imagen Generica">
+                    <div class="card-body">
+                        <h5 class="card title">{{ juegos.nombre }}</h5>
+                        <p class="card-text">Plataform: {{ juegos.plataform }}</p>
+                        <p class="card-text">Precio: $ {{ juegos.precio }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
