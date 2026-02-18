@@ -12,6 +12,7 @@ def lista_juegos(request):
         {'nombre': 'Dark Whispers', 'precio': 34.99, 'plataforma':'PC, PS5, Xbox Serie X'},
         {'nombre': 'Space Zero', 'precio': 44.99, 'plataforma':'PC, PS5'},
         {'nombre': 'Resident Evil', 'precio': 85.99, 'plataforma':'PS5'},
+        {'nombre': 'Mario Bros', 'precio': 25.99, 'plataforma':'Switch'},
     ]
 
     contexto_catalogo_juegos = {'lista_juegos': juegos}
