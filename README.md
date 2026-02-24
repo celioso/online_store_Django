@@ -1,4 +1,4 @@
-# tienda
+# Tienda
 
 ## MVC
 
