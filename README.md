@@ -859,4 +859,63 @@ Se usa para agrupar contenido introductorio o de navegación, como:
 * Mejora el **SEO**
 * Hace el código más claro y **mantenible**
 
-##
+### Para cargar los datos en Shell de Django utilizando ChatGPT
+
+se le escribe a ChatGPT
+
+Dame un codigo para el shell de Django que introduzca los siguientes datos en el modelo Juego.
+
+´´´python 
+{'nombre': 'Dogo Racing', 'precio': 29.99, 'plataforma':'PC, PS5, Xbox Serie X'}, 
+{'nombre': 'PLatform', 'precio': 14.99, 'plataforma':'PC, Switch'},
+{'nombre': 'Urban Darkness', 'precio': 39.99, 'plataforma':'PC, PS5'}, 
+{'nombre': 'Highspeeed', 'precio': 29.99, 'plataforma':'PC, Xbox Serie X'}, 
+{'nombre': 'Night Mode', 'precio': 19.99, 'plataforma':'PC, pS4, Xbox One'}, 
+{'nombre': 'The Grand Thief', 'precio': 59.99, 'plataforma':'PC, PS5, Xbox Serie X'}, 
+{'nombre': 'Sunset Vibe', 'precio': 24.99, 'plataforma':'PC, Switch, Mobile'}, 
+{'nombre': 'Dark Whispers', 'precio': 34.99, 'plataforma':'PC, PS5, Xbox Serie X'}, 
+{'nombre': 'Space Zero', 'precio': 44.99, 'plataforma':'PC, PS5'}, 
+{'nombre': 'Resident Evil', 'precio': 85.99, 'plataforma':'PS5'}, 
+{'nombre': 'Mario Bros', 'precio': 25.99, 'plataforma':'Switch'}, 
+{'nombre': 'Terminator', 'precio': 25.9, 'plataforma':'PC'},
+´´´
+
+Este esa el modelo y la APP se llama catalogo
+
+´´´python
+from django.db import models
+
+class Juego(models.Model):
+    nombre = models.CharField(max_length=100)
+    precio = models.DecimalField(max_digits=6, decimal_places=2)
+    plataforma = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.nombre
+´´´
+
+y megenera este código 
+
+´´´python
+from catalogo.models import Juego
+
+juegos = [
+    {'nombre': 'Dogo Racing', 'precio': 29.99, 'plataforma':'PC, PS5, Xbox Serie X'},
+    {'nombre': 'PLatform', 'precio': 14.99, 'plataforma':'PC, Switch'},
+    {'nombre': 'Urban Darkness', 'precio': 39.99, 'plataforma':'PC, PS5'},
+    {'nombre': 'Highspeeed', 'precio': 29.99, 'plataforma':'PC, Xbox Serie X'},
+    {'nombre': 'Night Mode', 'precio': 19.99, 'plataforma':'PC, PS4, Xbox One'},
+    {'nombre': 'The Grand Thief', 'precio': 59.99, 'plataforma':'PC, PS5, Xbox Serie X'},
+    {'nombre': 'Sunset Vibe', 'precio': 24.99, 'plataforma':'PC, Switch, Mobile'},
+    {'nombre': 'Dark Whispers', 'precio': 34.99, 'plataforma':'PC, PS5, Xbox Serie X'},
+    {'nombre': 'Space Zero', 'precio': 44.99, 'plataforma':'PC, PS5'},
+    {'nombre': 'Resident Evil', 'precio': 85.99, 'plataforma':'PS5'},
+    {'nombre': 'Mario Bros', 'precio': 25.99, 'plataforma':'Switch'},
+    {'nombre': 'Terminator', 'precio': 25.90, 'plataforma':'PC'},
+]
+
+for juego in juegos:
+    Juego.objects.create(**juego)
+
+print("Juegos insertados correctamente.")
+´´´
