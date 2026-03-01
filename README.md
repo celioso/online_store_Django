@@ -861,7 +861,7 @@ Se usa para agrupar contenido introductorio o de navegación, como:
 
 ### Para cargar los datos en Shell de Django utilizando ChatGPT
 
-se le escribe a ChatGPT
+se le escribe a **ChatGPT**
 
 Dame un codigo para el shell de Django que introduzca los siguientes datos en el modelo Juego.
 
