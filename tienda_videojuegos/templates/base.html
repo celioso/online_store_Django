@@ -49,10 +49,18 @@
             <!-- Contenido colapsable -->
             <div class="collapse navbar-collapse" id="navbarPF">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Tienda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Noticias</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'contacto' %}">Contacto</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/' %}active {% endif %}" href="{% url 'home' %}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if '/catalogo/' in request.path %} active {% endif %}" href="{% url 'lista_juegos' %}">Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if '/noticias/' in request.path %} active {% endif %}" href="#">Noticias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% '/contacto/' in request.path %} active {% endif %}" href="{% url 'contacto' %}">Contacto</a>
+                    </li>
                 </ul>
 
                 <!-- Buscador -->

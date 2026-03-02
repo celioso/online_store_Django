@@ -919,3 +919,14 @@ for juego in juegos:
 
 print("Juegos insertados correctamente.")
 ´´´
+
+## Creacion de superUsuario
+
+´´´shell
+python manage.py createsuperuser
+Nombre de usuario (leave blank to use 'juan'): 
+Dirección de correo electrónico: falso@hotmail.com
+Password: 
+Password (again):
+Superuser created successfully.
+´´´
