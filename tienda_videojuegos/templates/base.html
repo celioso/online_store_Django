@@ -59,15 +59,17 @@
                         <a class="nav-link {% if '/noticias/' in request.path %} active {% endif %}" href="#">Noticias</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% '/contacto/' in request.path %} active {% endif %}" href="{% url 'contacto' %}">Contacto</a>
+                        <a class="nav-link {% if '/contacto/' in request.path %} active {% endif %}" href="{% url 'contacto' %}">Contacto</a>
                     </li>
                 </ul>
 
                 <!-- Buscador -->
-                <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
-                <button class="btn btn-outline-info" type="submit">Buscar</button>
-                </form>
+                <form class="d-flex mb-2 mb-lg-0 me-lg-3 order-5 order-lg-4" role="search" action="{% url 'buscar_juegos' %}" method="get">
+                        <input class="form-control me-2" type="search" name="q" placeholder="Buscar..." aria-label="Buscar"
+                            value="{{ request.GET.q|default:'' }}">
+                        <button class="btn btn-outline-info" type="submit">Buscar</button>
+                    </form>
+
             </div>
         </div>
     </nav>

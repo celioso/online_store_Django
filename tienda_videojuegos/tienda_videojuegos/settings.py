@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "catalogo",
     "home",
+    "buscador",
 ]
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
