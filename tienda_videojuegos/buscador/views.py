@@ -17,5 +17,5 @@ def buscar_juegos(request):
         'query': query,
         'lista_juegos': page_obj
     }
-
+    
     return render(request, 'buscador/resultados_busqueda.html', contexto)

@@ -12,15 +12,14 @@
         {% for juego in lista_juegos %}
         <div class="col-md-4 mb-3">
             <div class="card h-100 shadow-sm">
-                <a href="{% url 'catalogo:detalle_juego' juego.id %}" class="text-decoration-none text-body">
-                    <img src="{% static 'img/portadas/'|add:juego.imagen %}" class="card-img-top"
-                        alt="{{ juego.nombre }}">
+                {#  <a href="{% url 'catalogo:detalle_juego' juego.id %} " class="text-decoration-none text-body"> #}
+                    <img src="{% static 'img/portadas/'|add:juego.imagen %}" class="card-img-top" alt="{{ juego.nombre }}">
                     <div class="card-body text-start">
                         <h5 class="card-title">{{ juego.nombre }}</h5>
                         <p class="card-text">{{ juego.plataforma }}</p>
-                        <p class="card-text fw-bold">{{ juego.precio }} €</p>
+                        <p class="card-text fw-bold"> $ {{ juego.precio }}</p>
                     </div>
-                </a>
+                {#  </a> #}     
             </div>
         </div>
         {% endfor %}
