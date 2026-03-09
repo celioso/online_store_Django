@@ -931,4 +931,4 @@ Password (again):
 Superuser created successfully.
 ´´´
 
-Esto crea el super usuario y para ingresar se coloca host/ doc
+Esto crea el super usuario y para ingresar se coloca `host/doc`
