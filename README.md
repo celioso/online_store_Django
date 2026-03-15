@@ -1,4 +1,4 @@
-# Tienda
+78# Tienda
 
 ## MVC
 
@@ -931,4 +931,4 @@ Password (again):
 Superuser created successfully.
 ´´´
 
-Esto crea el super usuario y para ingresar se coloca `host/doc` en el navegador, se tiene que ingresar el usuario y la contraseña que se creó. 
+Esto crea el super usuario y para ingresar se coloca `host/doc` en el *navegador*, se tiene que ingresar el usuario y la contraseña que se creó. 
