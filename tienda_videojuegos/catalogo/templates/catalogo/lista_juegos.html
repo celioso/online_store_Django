@@ -5,21 +5,27 @@
 {% block title %}listado de Juegos{% endblock %}
 
 {% block content %}
-    <h1 class="text-body">Lista de Juegos</h1>
-    <div class= "row row-cols-1 row-cols-md-3 g-4 mt-3">
-        {% for juegos in lista_juegos %}
-            <div class="col">
-                <div class="card h-100">
-                    <img src="{% static 'img/portadas/' %}{{ juegos.imagen }}" class= "card-img-top" alt="Imagen Generica">
-                    <div class="card-body">
-                        <h5 class="card title">{{ juegos.nombre }}</h5>
-                        <p class="card-text">Plataforma: {{ juegos.plataforma }}</p>
-                        <p class="card-text">Precio: $ {{ juegos.precio }}</p>
-                    </div>
+<h2 class="text-body">Lista de Juegos</h2>
+
+<div class= "row row-cols-1 row-cols-md-3 g-4 mt-3">
+    {% for juego in lista_juegos %}
+    <div class="col">
+        <a href="{% url 'catalogo:detalle_juego' juego.id %}" class="text-decoration-none text-dark">
+            <div class="card h-100 shadow-sm border-0 juego-card">
+                <img src="{% static 'img/portadas/' %}{{ juego.imagen }}" class= "card-img-top" alt="Imagen Generica">
+                <div class="card-body">
+                    <h5 class="card-title">{{ juego.nombre }}</h5>
+                    <p class="card-text">Plataforma: {{ juego.plataforma }}</p>
+                    <p class="card-text">Precio: $ {{ juego.precio }}</p>
+                    <button class="btn btn-primary mt-auto">
+                        <i class="fas fa-info-circle"></i> Ver detalles
+                    </button>
                 </div>
             </div>
-        {% endfor %}
+        </a>
     </div>
+    {% endfor %}
+</div>
 
     <!-- Paginación-->
     <nav arie-label="Paginación" class="mt-4">
