@@ -12,7 +12,7 @@ def registro_view(request):
             login(request, usuario)
             return redirect('home')
     else:
-        form = ReqistroForm()
+        form = RegistroForm()
     return render(request, 'usuarios/registro.html',
                 {'form':form})
 
@@ -24,5 +24,16 @@ def login_view(request):
             login(request, usuario)
             return redirect('home')
         else:
-            print(form.errors):
-            messages.error(request, 'usuarios/login.html', {'form': form})
+            form = LoginForm()
+            messages.error(request, "Usuario o contraseña incorrectos.")
+    else:
+        print(form.errors)
+        messages.error(request, 'usuarios/login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
+@login_required
+def perfil_view(request):
+    return render(request, 'usuarios/perfil.html')
