@@ -14,7 +14,7 @@
 | **View**       | Presentación (lo que ve el usuario) |
 | **Controller** | Intermediario entre Model y View    |
 
-## 1. Model (Modelo)
+## 1. Model (*Modelo*)
 
 * Representa los **datos**
 * Contiene la **lógica de negocio**
