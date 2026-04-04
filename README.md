@@ -919,6 +919,7 @@ for juego in juegos:
 
 print("Juegos insertados correctamente.")
 ´´´
+Para ingresar al sheel se utiliza `python manage.py shell`
 
 ## Creacion de superUsuario
 

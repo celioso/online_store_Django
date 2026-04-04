@@ -16,7 +16,7 @@ def registro_view(request):
     return render(request, 'usuarios/registro.html',
                 {'form':form})
 
-def login_view(request):
+'''def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request, data=request.POST)
         if form.is_valid():
@@ -29,6 +29,24 @@ def login_view(request):
     else:
         print(form.errors)
         messages.error(request, 'usuarios/login.html', {'form': form})
+'''
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request, data=request.POST) # Recibe los datos
+        if form.is_valid():
+            usuario = form.get_user()
+            login(request, usuario)
+            return redirect('home')
+        else:
+            # Si NO es válido, NO limpies el form. 
+            # Deja que contenga los errores para que se muestren en el HTML.
+            messages.error(request, "Usuario o contraseña incorrectos.")
+    else:
+        # Aquí es cuando cargan la página por primera vez (GET)
+        form = LoginForm() 
+
+    # El render debe ir afuera de los IF para que siempre devuelva una respuesta
+    return render(request, 'usuarios/login.html', {'form': form})
 
 def logout_view(request):
     logout(request)
