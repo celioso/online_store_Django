@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "catalogo",
     "buscador",
     "usuarios",
+    "carrito",
 ]
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'

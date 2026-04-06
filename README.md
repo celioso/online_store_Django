@@ -933,3 +933,23 @@ Superuser created successfully.
 ´´´
 
 Esto crea el super usuario y para ingresar se coloca `host/doc` en el *navegador*, se tiene que ingresar el usuario y la contraseña que se creó. 
+
+para ver el carrito del del el `shell`
+
+´´´shell
+>>> from django.contrib.auth import get_user_model
+>>> from carrito.models import Carrito
+>>>
+>>> Usuario = get_user_model()
+>>> test10 = Usuario.objects.get(username='test10')
+>>>
+>>> test10.carrito
+Carrito: Carrito de compre test10
+>>> test10.carrito.items.all()
+>>> QuerySet [<ItemCarrito: Sunset Vibe x 3>, <ItemCarrito: Dogo Racing x 1>]
+>>> test10.carrito.total_precio()
+Decimal(''104.96)
+>>> test10.carrito.total_items()
+4
+>>>
+´´´
