@@ -42,4 +42,5 @@ class ItemCarrito(models.Model):
     
     """
     4:55:55 pare ver el codigo shell
+    cas
     """
