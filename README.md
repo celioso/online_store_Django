@@ -954,4 +954,4 @@ Decimal(''104.96)
 >>>
 ´´´
 
-Esto muestra los items en el carro de compras, aque se utiliza test 10 de *usuario*
+Esto muestra los items en el carro de compras, aque se utiliza test10 de *usuario*
