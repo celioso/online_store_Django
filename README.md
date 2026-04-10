@@ -228,7 +228,7 @@ o informalmente **MVTU**.
 
 # Codigos de respuesta HTTP
 
-A continuación presento una **explicación clara y estructurada de HTTP**.
+A continuación presento una explicación clara y estructurada de HTTP.
 
 ## ¿Qué es HTTP?
 
