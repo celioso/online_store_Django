@@ -894,7 +894,7 @@ class Juego(models.Model):
         return self.nombre
 ´´´
 
-y megenera este código 
+y me genera este código 
 
 ´´´python
 from catalogo.models import Juego
