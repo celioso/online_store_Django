@@ -955,3 +955,286 @@ Decimal(''104.96)
 ´´´
 
 Esto muestra los items en el carro de compras, aque se utiliza test10 de *usuario*
+
+## comandos básicos de Django, enfocado a flujo real de trabajo (desarrollo backend):
+
+
+---
+
+🔹 1. Crear proyecto
+
+django-admin startproject nombre_proyecto
+
+Entrar al proyecto:
+
+cd nombre_proyecto
+
+
+---
+
+🔹 2. Ejecutar servidor
+
+python manage.py runserver
+
+Por defecto:
+
+http://127.0.0.1:8000/
+
+
+---
+
+🔹 3. Crear una app
+
+python manage.py startapp nombre_app
+
+👉 Luego debes registrarla en settings.py:
+
+INSTALLED_APPS = [
+    'nombre_app',
+]
+
+
+---
+
+🔹 4. Migraciones (Base de datos)
+
+Crear migraciones
+
+python manage.py makemigrations
+
+Aplicarlas a la BD
+
+python manage.py migrate
+
+Ver estado de migraciones
+
+python manage.py showmigrations
+
+
+---
+
+🔹 5. Crear superusuario (admin)
+
+python manage.py createsuperuser
+
+
+---
+
+🔹 6. Acceder a shell de Django
+
+python manage.py shell
+
+
+---
+
+🔹 7. Crear app + migrar en un flujo típico
+
+python manage.py startapp usuarios
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+
+
+---
+
+🔹 8. Recolectar archivos estáticos (producción)
+
+python manage.py collectstatic
+
+
+---
+
+🔹 9. Crear datos de prueba (fixtures)
+
+python manage.py dumpdata > datos.json
+python manage.py loaddata datos.json
+
+
+---
+
+🔹 10. Limpiar base de datos (reset)
+
+python manage.py flush
+
+
+---
+
+🔹 11. Ver comandos disponibles
+
+python manage.py help
+
+
+---
+
+🔹 12. Ejecutar tests
+
+python manage.py test
+
+
+---
+
+🔹 13. Crear migración específica de una app
+
+python manage.py makemigrations nombre_app
+
+
+---
+
+🔹 14. Migrar hasta un punto específico
+
+python manage.py migrate nombre_app 0001
+
+
+---
+
+💡 Flujo profesional recomendado
+
+En proyectos reales (como los que estás haciendo con Serverless o APIs), el flujo típico es:
+
+1. Crear proyecto
+
+
+2. Crear apps (modularizar dominio)
+
+
+3. Definir modelos
+
+
+4. makemigrations → migrate
+
+
+5. Crear vistas (views / DRF)
+
+
+6. Probar con runserver
+
+
+7. Tests
+
+
+
+
+---
+
+Si quieres, puedo darte un cheat sheet enfocado a Django REST Framework (que es más útil para APIs modernas, y va muy alineado con lo que estás trabajando).
+
+🔹 3. Crear una app
+
+python manage.py startapp nombre_app
+
+👉 Luego debes registrarla en settings.py:
+
+INSTALLED_APPS = [
+    'nombre_app',
+]
+
+
+---
+
+🔹 4. Migraciones (Base de datos)
+
+Crear migraciones
+
+python manage.py makemigrations
+
+Aplicarlas a la BD
+
+python manage.py migrate
+
+Ver estado de migraciones
+
+python manage.py showmigrations
+
+
+---
+
+🔹 5. Crear superusuario (admin)
+
+python manage.py createsuperuser
+
+
+---
+
+🔹 6. Acceder a shell de Django
+
+python manage.py shell
+
+
+---
+
+🔹 7. Crear app + migrar en un flujo típico
+
+python manage.py startapp usuarios
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
+
+
+--
+
+🔹 8. Recolectar archivos estáticos (producción)
+
+python manage.py collectstatic
+
+
+🔹 9. Crear datos de prueba (fixtures)
+
+python manage.py dumpdata > datos.json
+python manage.py loaddata datos.json
+
+
+
+🔹 10. Limpiar base de datos (reset)
+
+python manage.py flush
+
+
+
+🔹 11. Ver comandos disponibles
+
+python manage.py help
+
+
+🔹 12. Ejecutar tests
+
+python manage.py test
+
+
+🔹 13. Crear migración específica de una app
+
+python manage.py makemigrations nombre_app
+
+
+🔹 14. Migrar hasta un punto específico
+
+python manage.py migrate nombre_app 0001
+
+
+---
+
+💡 Flujo profesional recomendado
+
+En proyectos reales (como los que estás haciendo con Serverless o APIs), el flujo típico es:
+
+1. Crear proyecto
+
+
+2. Crear apps (modularizar dominio)
+
+
+3. Definir modelos
+
+
+4. makemigrations → migrate
+
+
+5. Crear vistas (views / DRF)
+
+
+6. Probar con runserver
+
+
+7. Tests
+
+
+Si quieres, puedo darte un cheat sheet enfocado a Django REST Framework (que es más útil para APIs modernas, y va muy alineado con lo que estás trabajando).
