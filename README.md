@@ -1056,7 +1056,7 @@ python manage.py loaddata datos.json
 
 💡 Flujo profesional recomendado
 
-En proyectos reales (como los que estás haciendo con Serverless o APIs), el flujo típico es:
+En proyectos reales (como los que estás haciendo con *Serverless* o *APIs*), el flujo típico es:
 
 1. Crear proyecto
 
