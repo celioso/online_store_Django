@@ -1072,4 +1072,4 @@ En proyectos reales (como los que estás haciendo con *Serverless* o *APIs*), el
 
 7. Tests
 
-Si quieres, puedo darte un cheat sheet enfocado a *Django REST Framework* (que es más útil para APIs modernas, y va muy alineado con lo que estás trabajando).
+Si quieres, puedo darte un cheat sheet enfocado a *Django REST Framework* (que es más útil para *APIs modernas*, y va muy alineado con lo que estás trabajando).
