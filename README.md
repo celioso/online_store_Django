@@ -1073,3 +1073,715 @@ En proyectos reales (como los que estás haciendo con *Serverless* o *APIs*), el
 7. Tests
 
 Si quieres, puedo darte un cheat sheet enfocado a *Django REST Framework* (que es más útil para *APIs modernas*, y va muy alineado con lo que estás trabajando).
+
+## **puntos clave (importantes)** al trabajar con **Django**, organizados de forma práctica y orientada a desarrollo real:
+
+## 🔹 1. Arquitectura MVT (Modelo - Vista - Template)
+
+Django no usa exactamente MVC, sino **MVT**:
+
+* **Model** → Define la estructura de la base de datos
+* **View** → Lógica de negocio (controlador real)
+* **Template** → Presentación (HTML dinámico)
+
+👉 Entender esta separación es crítico para mantener código limpio y escalable.
+
+## 🔹 2. ORM (Object Relational Mapping)
+
+Django incluye un ORM muy potente:
+
+* Evita escribir SQL directamente
+* Permite consultas como:
+
+  ```python
+  User.objects.filter(active=True)
+  ```
+* Soporta múltiples bases de datos
+
+👉 Ventaja: productividad
+👉 Riesgo: queries ineficientes si no optimizas (`select_related`, `prefetch_related`)
+
+## 🔹 3. Sistema de URLs (Routing)
+
+* Usa `urls.py` para mapear endpoints
+* Soporta rutas dinámicas:
+
+  ```python
+  path('user/<int:id>/', views.user_detail)
+  ```
+
+👉 Buen diseño de rutas = API limpia y mantenible
+
+## 🔹 4. Admin automático
+
+Django trae un panel listo:
+
+* CRUD inmediato sin frontend
+* Personalizable
+* Ideal para backoffice
+
+👉 Acelera desarrollo, pero no siempre es ideal para producción sin ajustes
+
+## 🔹 5. Seguridad integrada
+
+Django incluye protecciones por defecto:
+
+* CSRF protection
+* SQL Injection prevention
+* XSS protection
+* Password hashing
+
+👉 Muy robusto si no desactivas configuraciones por descuido
+
+## 🔹 6. Sistema de autenticación
+
+* Login, logout, registro
+* Permisos y roles
+* Middleware de sesiones
+
+👉 Base sólida para apps con usuarios
+
+## 🔹 7. Middleware
+
+Permite interceptar requests/responses:
+
+* Logging
+* Autenticación
+* Manejo de errores
+
+👉 Útil para arquitectura avanzada
+
+## 🔹 8. Apps reutilizables
+
+Django se organiza en **apps**:
+
+* Modularidad real
+* Puedes reutilizar apps en otros proyectos
+
+👉 Piensa en cada feature como una app independiente
+
+## 🔹 9. Migraciones
+
+* Control de cambios en base de datos
+* Versionado automático
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+👉 Fundamental para trabajo en equipo
+
+## 🔹 10. Django REST Framework (DRF)
+
+Para APIs modernas necesitas:
+
+* Django REST Framework
+
+Permite:
+
+* Serialización
+* ViewSets
+* Autenticación JWT
+* APIs escalables
+
+👉 Django puro NO es suficiente para APIs complejas
+
+## 🔹 11. Escalabilidad y rendimiento
+
+Django es robusto, pero:
+
+* Usa caching (`Redis`)
+* Optimiza queries
+* Considera async (`ASGI`)
+
+👉 Si no optimizas, puede volverse lento en alto tráfico
+
+## 🔹 12. Configuración por entornos
+
+* `settings.py` separado (dev / prod)
+* Uso de variables de entorno (`.env`)
+
+👉 Clave para despliegue profesional
+
+## 🔹 13. Despliegue
+
+Opciones comunes:
+
+* Amazon Web Services (Elastic Beanstalk, EC2)
+* Docker + Nginx + Gunicorn
+* Heroku (más simple, menos control)
+
+👉 Producción ≠ desarrollo local
+
+## 🔹 14. Testing
+
+* Framework integrado (`unittest`)
+* Tests de modelos, vistas y APIs
+
+👉 Fundamental para proyectos serios
+
+## 🔹 15. Buenas prácticas clave
+
+* No pongas lógica en templates
+* Mantén views delgadas
+* Usa servicios o capas intermedias si crece el proyecto
+* Divide en apps coherentes
+* Documenta APIs
+
+## ⚠️ Insight estratégico (importante)
+
+Django es excelente para:
+
+✔ Sistemas empresariales
+✔ APIs robustas
+✔ CRUD complejos
+✔ Proyectos con base de datos fuerte
+
+Pero NO es ideal para:
+
+❌ Microservicios ultra ligeros
+❌ Apps frontend-heavy sin API clara (mejor React + backend separado)
+
+Voy a darte una **arquitectura de producción realista** usando **Django + Django REST Framework + AWS**, alineada con patrones modernos (incluyendo lo que ya vienes trabajando con serverless y colas).
+
+
+# 🏗️ Arquitectura completa (visión general)
+
+```
+Cliente (Web / Mobile)
+        ↓
+CloudFront (CDN)
+        ↓
+API Gateway (opcional)
+        ↓
+Load Balancer (ALB)
+        ↓
+Django + DRF (EC2 / ECS / Elastic Beanstalk)
+        ↓
+PostgreSQL (RDS)
+        ↓
+Redis (Cache + Celery Broker)
+        ↓
+SQS (colas async)
+        ↓
+Workers (Celery / Lambda)
+        ↓
+S3 (almacenamiento archivos)
+```
+
+# 🔹 1. Capa de entrada (Frontend + CDN)
+
+### Componentes:
+
+* Amazon CloudFront
+* (Opcional) Amazon API Gateway
+
+### Función:
+
+* Cachea contenido estático
+* Reduce latencia global
+* Protege backend
+
+👉 Si tu frontend es React/Vue, lo sirves desde S3 + CloudFront.
+
+# 🔹 2. Backend principal (Django + DRF)
+
+### Deploy:
+
+* Amazon EC2 (control total)
+* o AWS Elastic Beanstalk (más simple)
+* o Amazon ECS (contenedores)
+
+### Stack interno:
+
+* Gunicorn (WSGI)
+* Nginx (reverse proxy)
+
+### Responsabilidad:
+
+* Lógica de negocio
+* APIs REST
+* Autenticación
+* Orquestación
+
+# 🔹 3. Base de datos
+
+### Opción recomendada:
+
+* Amazon RDS (PostgreSQL)
+
+### Buenas prácticas:
+
+* Read replicas si escala
+* Backups automáticos
+* Índices bien diseñados
+
+# 🔹 4. Almacenamiento de archivos
+
+### Servicio:
+
+* Amazon S3
+
+### Uso:
+
+* Imágenes
+* PDFs
+* Videos
+* Archivos de usuarios
+
+### Integración Django:
+
+```python
+# settings.py
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+```
+
+👉 Nunca guardes archivos en el servidor (anti-pattern)
+
+# 🔹 5. Procesamiento asíncrono
+
+Aquí está la parte crítica para escalar.
+
+## Opción A (recomendada en tu caso):
+
+* Amazon SQS + workers
+
+## Opción B:
+
+* Celery + Redis
+
+### Flujo típico:
+
+```
+Usuario sube imagen
+      ↓
+Django guarda en S3
+      ↓
+Envía mensaje a SQS
+      ↓
+Worker procesa (thumbnail, IA, etc.)
+      ↓
+Guarda resultado en S3 / DB
+```
+
+👉 Esto desacopla y evita bloquear requests
+
+# 🔹 6. Workers (procesamiento)
+
+Opciones:
+
+### 1. Celery workers (clásico)
+
+* Corre en EC2 o ECS
+* Usa Redis o SQS
+
+### 2. Lambda (serverless moderno)
+
+* AWS Lambda
+
+👉 Para tu caso (thumbnail generator), Lambda es ideal
+
+# 🔹 7. Cache y rendimiento
+
+### Servicio:
+
+* Amazon ElastiCache
+
+### Uso:
+
+* Cache de queries
+* Sesiones
+* Rate limiting
+
+# 🔹 8. Seguridad
+
+### Componentes:
+
+* IAM Roles
+* Security Groups
+* HTTPS (ACM)
+
+### Django:
+
+* CSRF
+* JWT (DRF)
+* OAuth si necesitas
+
+# 🔹 9. Observabilidad (clave en producción)
+
+### Servicios:
+
+* Amazon CloudWatch
+* AWS X-Ray
+
+### Métricas:
+
+* Latencia API
+* Errores 5xx
+* Tiempo de workers
+
+# 🔹 10. CI/CD
+
+### Pipeline:
+
+* GitHub Actions / GitLab CI
+* Deploy automático a:
+
+  * Beanstalk
+  * ECS
+  * EC2
+
+# 🔹 11. Estructura del proyecto Django (producción)
+
+```
+project/
+├── apps/
+│   ├── users/
+│   ├── payments/
+│   ├── media/
+│   └── notifications/
+├── core/
+│   ├── settings/
+│   │   ├── base.py
+│   │   ├── dev.py
+│   │   └── prod.py
+│   ├── urls.py
+│   └── wsgi.py
+├── services/        # lógica de negocio desacoplada
+├── integrations/    # S3, SQS, APIs externas
+├── tasks/           # async jobs
+```
+
+# 🔹 12. Flujo real (ejemplo: tu proyecto de thumbnails)
+
+```
+POST /upload
+   ↓
+Django (DRF)
+   ↓
+Guarda imagen en S3
+   ↓
+Envía mensaje a SQS
+   ↓
+Lambda / Worker
+   ↓
+Procesa imagen (Sharp/Pillow)
+   ↓
+Guarda thumbnail en S3
+   ↓
+Actualiza estado en DB
+```
+
+# ⚠️ Decisión estratégica (muy importante)
+
+### Si tu sistema es:
+
+* CRUD + lógica compleja → Django full ✔️
+* Eventos + procesamiento async → SQS + Lambda ✔️
+
+👉 Lo ideal (y profesional hoy):
+**Arquitectura híbrida**
+
+* Django = cerebro (API + negocio)
+* Lambda/SQS = músculos (procesamiento pesado)
+
+# 🚀 Arquitectura recomendada para TI (directa)
+
+Dado lo que vienes haciendo:
+
+✔ Django + DRF (API principal)
+✔ S3 (archivos)
+✔ SQS (colas)
+✔ Lambda (procesamiento)
+✔ RDS (PostgreSQL)
+✔ CloudFront (performance)
+
+👉 Eso ya es arquitectura de nivel producción real.
+
+Si quieres, el siguiente paso lógico es:
+
+👉 Te armo un **ejemplo completo con código (Django + SQS + S3 + Lambda)** listo para desplegar, alineado con tu proyecto serverless.
+
+Te voy a dar un **ejemplo funcional end-to-end** listo para desplegar, alineado con producción:
+
+* Backend: **Django + Django REST Framework**
+* Storage: **Amazon S3**
+* Cola: **Amazon SQS**
+* Procesamiento: **AWS Lambda**
+
+Caso: **subes imagen → se guarda en S3 → se envía a SQS → Lambda genera thumbnail**
+
+---
+
+# 🧩 1. Backend Django
+
+## 📦 Instalación
+
+```bash
+pip install django djangorestframework boto3 django-storages pillow python-dotenv
+```
+
+---
+
+## ⚙️ settings.py
+
+```python
+import os
+
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = "mi-bucket-imagenes"
+AWS_S3_REGION_NAME = "us-east-1"
+
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+# SQS
+SQS_QUEUE_URL = os.getenv("SQS_QUEUE_URL")
+```
+
+---
+
+## 🧱 models.py
+
+```python
+from django.db import models
+
+class Image(models.Model):
+    original = models.URLField()
+    thumbnail = models.URLField(blank=True, null=True)
+    status = models.CharField(max_length=20, default="pending")
+    created_at = models.DateTimeField(auto_now_add=True)
+```
+
+---
+
+## 🔌 SQS producer (services/sqs.py)
+
+```python
+import boto3
+import json
+from django.conf import settings
+
+sqs = boto3.client("sqs", region_name="us-east-1")
+
+def send_to_sqs(data):
+    sqs.send_message(
+        QueueUrl=settings.SQS_QUEUE_URL,
+        MessageBody=json.dumps(data)
+    )
+```
+
+---
+
+## 📤 upload view (views.py)
+
+```python
+import boto3
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.conf import settings
+from .models import Image
+from .services.sqs import send_to_sqs
+
+s3 = boto3.client("s3")
+
+class UploadImageView(APIView):
+    def post(self, request):
+        file = request.FILES["file"]
+
+        key = f"uploads/{file.name}"
+
+        s3.upload_fileobj(file, settings.AWS_STORAGE_BUCKET_NAME, key)
+
+        url = f"https://{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{key}"
+
+        image = Image.objects.create(original=url)
+
+        # enviar a SQS
+        send_to_sqs({
+            "image_id": image.id,
+            "s3_key": key
+        })
+
+        return Response({"message": "uploaded", "id": image.id})
+```
+
+---
+
+## 🌐 urls.py
+
+```python
+from django.urls import path
+from .views import UploadImageView
+
+urlpatterns = [
+    path("upload/", UploadImageView.as_view()),
+]
+```
+
+---
+
+# ⚡ 2. Lambda (procesamiento de imagen)
+
+## 📦 requirements (Lambda Layer)
+
+```bash
+pip install pillow -t python/
+zip -r layer.zip python/
+```
+
+---
+
+## 🧠 lambda_function.py
+
+```python
+import json
+import boto3
+from PIL import Image
+from io import BytesIO
+
+s3 = boto3.client("s3")
+
+BUCKET = "mi-bucket-imagenes"
+
+def lambda_handler(event, context):
+    for record in event["Records"]:
+        body = json.loads(record["body"])
+
+        key = body["s3_key"]
+        image_id = body["image_id"]
+
+        # descargar imagen
+        obj = s3.get_object(Bucket=BUCKET, Key=key)
+        image = Image.open(obj["Body"])
+
+        # crear thumbnail
+        image.thumbnail((200, 200))
+
+        buffer = BytesIO()
+        image.save(buffer, "JPEG")
+        buffer.seek(0)
+
+        thumb_key = f"thumbnails/{key.split('/')[-1]}"
+
+        # subir thumbnail
+        s3.put_object(
+            Bucket=BUCKET,
+            Key=thumb_key,
+            Body=buffer,
+            ContentType="image/jpeg"
+        )
+
+        print(f"Processed image {image_id}")
+```
+
+---
+
+# 🔗 3. Conectar SQS → Lambda
+
+Configura trigger:
+
+```bash
+aws lambda create-event-source-mapping \
+  --function-name thumbnail-generator \
+  --event-source-arn <SQS_ARN> \
+  --batch-size 1
+```
+
+---
+
+# 🗄️ 4. Crear SQS
+
+```bash
+aws sqs create-queue --queue-name image-processing-queue
+```
+
+Guarda:
+
+* Queue URL
+* ARN
+
+---
+
+# 🪣 5. Crear S3
+
+```bash
+aws s3 mb s3://mi-bucket-imagenes
+```
+
+Permisos:
+
+```json
+{
+  "Effect": "Allow",
+  "Action": ["s3:*"],
+  "Resource": "*"
+}
+```
+
+---
+
+# 🔐 6. Variables de entorno
+
+### Django (.env)
+
+```env
+AWS_ACCESS_KEY_ID=xxx
+AWS_SECRET_ACCESS_KEY=xxx
+SQS_QUEUE_URL=https://sqs.us-east-1.amazonaws.com/xxx/queue
+```
+
+---
+
+# 🚀 7. Flujo completo (lo que pasa realmente)
+
+1. Cliente → POST `/upload`
+2. Django:
+
+   * Sube imagen a S3
+   * Guarda registro en DB
+   * Envía mensaje a SQS
+3. SQS activa Lambda
+4. Lambda:
+
+   * Descarga imagen
+   * Genera thumbnail
+   * Guarda en S3
+
+👉 Todo desacoplado, escalable y sin bloquear requests
+
+---
+
+# 📈 8. Mejora tipo producción (lo que deberías hacer)
+
+* Actualizar DB desde Lambda (API o evento)
+* Usar **presigned URLs** para subir directo a S3
+* Agregar:
+
+  * CloudWatch logs
+  * Dead Letter Queue (SQS)
+* Versionar imágenes
+
+---
+
+# ⚠️ Observación crítica (arquitectura real)
+
+Esto ya es **arquitectura profesional**. Pero si lo dejas así:
+
+❌ Django subiendo archivos → cuello de botella
+✔ Mejor: frontend → S3 directo (presigned URL)
+
+---
+
+# 🧠 Siguiente paso recomendado
+
+Dado tu nivel y lo que vienes haciendo con Serverless:
+
+👉 Te puedo armar:
+
+* Infraestructura completa con **Serverless Framework (YAML)**
+* CI/CD
+* Seguridad IAM bien configurada
+
+Solo dime: *“quiero deploy automático”* y lo armamos.
