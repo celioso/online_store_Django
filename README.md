@@ -1782,6 +1782,4 @@ Dado tu nivel y lo que vienes haciendo con Serverless:
 
 * Infraestructura completa con **Serverless Framework (YAML)**
 * CI/CD
-* Seguridad *IAM* bien configurada
-
-Solo dime: *“quiero deploy automático”* y lo armamos.
+* Seguridad *IAM* bien configurada
