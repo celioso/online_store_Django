@@ -1782,4 +1782,47 @@ Dado tu nivel y lo que vienes haciendo con Serverless:
 
 * Infraestructura completa con **Serverless Framework (YAML)**
 * CI/CD
-* Seguridad *IAM* bien configurada
+* Seguridad *IAM* bien configurada
+
+¡Excelente elección! **Django** es el framework de "baterías incluidas" por excelencia. Es potente, seguro y te permite moverte rápido, pero tiene su propia "filosofía" (el *Django Way*). 
+
+# consejos clave para pasar de ser un principiante a un profesional en Django:
+
+## 1. Domina el ORM (Object-Relational Mapper)
+El ORM es el corazón de Django. Evita escribir SQL manual y aprovecha las herramientas integradas para mantener tu base de datos limpia.
+
+* **Evita el problema de "N+1 queries":** Usa `select_related` para relaciones de clave foránea (One-to-One, Many-to-One) y `prefetch_related` para relaciones Many-to-Many. Esto reduce drásticamente las consultas a la base de datos.
+* **Usa `QuerySets` perezosos:** Recuerda que las consultas no se ejecutan hasta que intentas iterar sobre los datos o evaluarlos.
+
+## 2. La lógica va en los Modelos (o Selectores), no en las Vistas
+Un error común es llenar el archivo `views.py` de lógica de negocio.
+* **Fat Models, Skinny Views:** Intenta que tus vistas solo se encarguen de recibir la petición y devolver la respuesta. La lógica de procesamiento de datos debe vivir en los métodos del modelo o en archivos de servicios/selectores independientes.
+* **Custom Managers:** Crea managers personalizados para encapsular filtros comunes. En lugar de hacer `Product.objects.filter(status='active', stock__gt=0)`, crea un método `Product.objects.active()`.
+
+## 3. Aprovecha las "Baterías Incluidas"
+Django ya resolvió la mayoría de los problemas comunes. Antes de instalar una librería externa, verifica si Django ya tiene una solución:
+* **Sistema de Autenticación:** Es robusto y seguro. No reinventes el login.
+* **Django Admin:** Es una herramienta increíble para gestión interna. Personalízala con `list_display`, `list_filter` y `search_fields`.
+* **Middlewares:** Ideales para procesar datos globalmente (como manejo de zonas horarias o seguridad).
+
+## 4. Estructura y Seguridad
+* **Usa variables de entorno:** **Nunca** subas tu `SECRET_KEY` o credenciales de base de datos a GitHub. Usa librerías como `python-decouple` o `django-environ`.
+* **Configuraciones divididas:** Separa tu archivo `settings.py` en `base.py`, `local.py` y `production.py` para evitar errores al desplegar.
+* **Custom User Model:** Regla de oro: **Empieza siempre tus proyectos con un modelo de usuario personalizado**, incluso si el que viene por defecto te sirve. Cambiarlo después de que la base de datos tiene datos es un dolor de cabeza enorme.
+
+## 5. Herramientas Imprescindibles
+Para mejorar tu flujo de trabajo, instala estas herramientas de inmediato:
+* **Django Debug Toolbar:** Te muestra en tiempo real cuántas queries se ejecutan, el tiempo de carga y los headers de cada página.
+* **Extensions:** `django-extensions` te da el comando `shell_plus`, que carga todos tus modelos automáticamente al abrir la terminal.
+
+## Ejemplo de Optimización de Consulta
+Si tienes un modelo de Libros y Autores, en lugar de esto:
+```python
+# Mal: Genera una consulta por cada libro para obtener el autor
+books = Book.objects.all() 
+```
+Haz esto:
+```python
+# Bien: Trae todo en una sola consulta con JOIN
+books = Book.objects.select_related('author').all()
+```
