@@ -1786,7 +1786,7 @@ Dado tu nivel y lo que vienes haciendo con Serverless:
 
 ¡Excelente elección! **Django** es el framework de "baterías incluidas" por excelencia. Es potente, seguro y te permite moverte rápido, pero tiene su propia "filosofía" (el *Django Way*). 
 
-# consejos clave para pasar de ser un principiante a un profesional en Django:
+# consejos clave para pasar de ser un principiante a un profesional en *Django*:
 
 ## 1. Domina el ORM (Object-Relational Mapper)
 El ORM es el corazón de Django. Evita escribir SQL manual y aprovecha las herramientas integradas para mantener tu base de datos limpia.
