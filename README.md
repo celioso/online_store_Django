@@ -1180,10 +1180,10 @@ Para APIs modernas necesitas:
 
 Permite:
 
-* Serialización
-* ViewSets
-* Autenticación JWT
-* APIs escalables
+* *Serialización*
+* *ViewSets*
+* *Autenticación JWT*
+* *APIs escalables*
 
 👉 Django puro NO es suficiente para APIs complejas
 
