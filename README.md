@@ -266,7 +266,7 @@ Ejemplo:
 * `GET /usuarios` → obtener usuarios
 * `POST /usuarios` → crear un usuario
 
-## Códigos de estado HTTP
+## Códigos de estado *HTTP*
 
 Indican el **resultado** de la petición:
 
