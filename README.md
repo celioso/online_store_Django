@@ -1821,7 +1821,7 @@ Si tienes un modelo de Libros y Autores, en lugar de esto:
 # Mal: Genera una consulta por cada libro para obtener el autor
 books = Book.objects.all() 
 ```
-Haz esto:
+*Haz esto*:
 ```python
 # Bien: Trae todo en una sola consulta con JOIN
 books = Book.objects.select_related('author').all()
