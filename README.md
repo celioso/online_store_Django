@@ -1826,3 +1826,188 @@ books = Book.objects.all()
 # Bien: Trae todo en una sola consulta con JOIN
 books = Book.objects.select_related('author').all()
 ```
+
+# Desplegar la web en RENDER
+
+Desplegar una app de **Django en Render** es directo si dejas bien configurados los archivos de entorno y arranque. Te explico el flujo completo sin ambigüedades.
+
+
+# 🧩 1. Preparar tu proyecto Django
+
+Dentro de tu proyecto asegúrate de tener:
+
+### ✅ `requirements.txt`
+
+Generado con:
+
+```bash
+pip freeze > requirements.txt
+```
+
+### ✅ `runtime.txt` (opcional pero recomendable)
+
+Define la versión de Python:
+
+```
+python-3.11.9
+```
+
+### ✅ `build.sh`
+
+Script de construcción (Render lo ejecuta al desplegar):
+
+```bash
+#!/usr/bin/env bash
+pip install -r requirements.txt
+python manage.py collectstatic --noinput
+python manage.py migrate
+```
+
+### ✅ `start.sh`
+
+Script de arranque:
+
+```bash
+gunicorn config.wsgi:application
+```
+
+> ⚠️ Cambia `config` por el nombre real de tu proyecto.
+
+# ⚙️ 2. Configuración en Django (`settings.py`)
+
+### 🔐 Variables críticas
+
+```python
+import os
+
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
+DEBUG = False
+
+ALLOWED_HOSTS = ["*"]  # luego puedes restringir
+```
+
+### 📦 Static files (clave para producción)
+
+Instala:
+
+```bash
+pip install whitenoise
+```
+
+Configura:
+
+```python
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    ...
+]
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+```
+
+### 🗄️ Base de datos (Render PostgreSQL)
+
+Render te da una URL tipo:
+
+```
+postgres://user:pass@host:port/db
+```
+
+Usa:
+
+```bash
+pip install dj-database-url psycopg2-binary
+```
+
+Y en `settings.py`:
+
+```python
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get("DATABASE_URL"))
+}
+```
+
+# ☁️ 3. Crear servicio en Render
+
+1. Ve a Render
+2. “New +” → **Web Service**
+3. Conecta tu repo (GitHub/GitLab)
+
+## Configuración clave
+
+* **Build Command:**
+
+```bash
+bash build.sh
+```
+
+* **Start Command:**
+
+```bash
+bash start.sh
+```
+
+## Variables de entorno (MUY IMPORTANTE)
+
+Agrega:
+
+* `SECRET_KEY`
+* `DATABASE_URL` (si usas PostgreSQL de Render)
+* `DEBUG=False`
+
+# 🗄️ 4. Crear base de datos en Render
+
+1. “New +” → PostgreSQL
+2. Copia el `DATABASE_URL`
+3. Lo pegas en variables de entorno del servicio web
+
+# 🚀 5. Deploy
+
+* Render hace deploy automático al hacer push
+* Te dará una URL tipo:
+
+```
+https://tu-app.onrender.com
+```
+
+# ⚠️ Problemas comunes (y cómo evitarlos)
+
+### ❌ Error: Static files no cargan
+
+✔️ Solución: `collectstatic` + `whitenoise`
+
+### ❌ Error: App no inicia
+
+✔️ Revisa:
+
+* Nombre correcto en `gunicorn config.wsgi`
+* Logs en Render
+
+### ❌ Error: base de datos no conecta
+
+✔️ Verifica:
+
+* `DATABASE_URL`
+* Librerías instaladas
+
+# 🧠 Recomendación nivel producción
+
+* Usa `gunicorn` con workers:
+
+```bash
+gunicorn config.wsgi:application --workers 3
+```
+
+* Agrega `django-environ` para manejo limpio de variables
+
+* Configura dominio personalizado si escalarás
+
+Si quieres, puedo:
+
+* Revisar tu repo y darte la **config exacta lista para deploy**
+* O crearte un template Django optimizado para Render (tipo boilerplate profesional)
