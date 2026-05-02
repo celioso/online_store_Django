@@ -20,13 +20,6 @@ def agregar_al_carrito(request, juego_id):
     return redirect('catalogo:detalle_juego', pk=juego_id)
 
 @login_required
-def ver_carrito(request):
-    carrito, _ = Carrito.objects.get_or_create(usuario=request.user)
-    items = carrito.items.select_related('juego')
-    total = carrito.total_precio()
-    return render(request, 'carrito/ver_carrito.html', {'carrito': carrito, 'items': items, 'total': total})
-
-@login_required
 def eliminar_del_carrito(request, juego_id):
     carrito, _ = Carrito.objects.get_or_create(usuario=request.user)
     item = carrito.items.filter(juego_id=juego_id).first()
@@ -46,3 +39,10 @@ def limpiar_carrito(request):
     else:
         messages.info(request, "El carrito ya estaba vacío.")
     return redirect('carrito:ver_carrito')
+
+@login_required
+def ver_carrito(request):
+    carrito, _ = Carrito.objects.get_or_create(usuario=request.user)
+    items = carrito.items.select_related('juego')
+    total = carrito.total_precio()
+    return render(request, 'carrito/ver_carrito.html', {'carrito': carrito, 'items': items, 'total': total})

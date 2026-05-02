@@ -10,6 +10,7 @@ def registro_view(request):
         if form.is_valid():
             usuario = form.save()
             login(request, usuario)
+            messages.success(request, "Registro completado correctamente")
             return redirect('home')
     else:
         form = RegistroForm()
@@ -36,6 +37,7 @@ def login_view(request):
         if form.is_valid():
             usuario = form.get_user()
             login(request, usuario)
+            messages.success(request, "Inicio de sesión correcto.")
             return redirect('home')
         else:
             # Si NO es válido, NO limpies el form. 
@@ -50,6 +52,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
+    messages.info(request, "Has cerrado sesión correctamente")
     return redirect('login')
 
 @login_required
