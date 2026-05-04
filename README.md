@@ -2005,7 +2005,7 @@ gunicorn config.wsgi:application --workers 3
 
 * Agrega `django-environ` para manejo limpio de variables
 
-* Configura dominio personalizado si escalarás
+* Configura *dominio* personalizado si escalarás
 
 Si quieres, puedo:
 
