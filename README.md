@@ -2010,4 +2010,4 @@ gunicorn config.wsgi:application --workers 3
 Si quieres, puedo:
 
 * Revisar tu repo y darte la **config exacta lista para deploy**
-* O crearte un template Django optimizado para Render (tipo boilerplate profesional)
+* O crearte un template Django optimizado para Render (*tipo boilerplate profesional*)
