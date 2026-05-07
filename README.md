@@ -1969,7 +1969,7 @@ Agrega:
 # 🚀 5. Deploy
 
 * Render hace deploy automático al hacer push
-* Te dará una URL tipo:
+* Te dará una *URL* tipo:
 
 ```
 https://tu-app.onrender.com
