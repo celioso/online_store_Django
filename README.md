@@ -1,4 +1,4 @@
-Gy# Tienda
+# Tienda
 
 ## MVC
 
