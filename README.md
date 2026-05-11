@@ -2011,3 +2011,104 @@ Si quieres, puedo:
 
 * Revisar tu repo y darte la **config exacta lista para deploy**
 * O crearte un template Django optimizado para Render (*tipo boilerplate profesional*)
+
+## ¿Qué es `python-dotenv`?
+
+python-dotenv es una librería de Python que permite cargar variables de entorno desde un archivo `.env`.
+
+Se usa para:
+
+* Guardar configuraciones sensibles
+* Evitar poner secretos en el código
+* Manejar distintos entornos (dev, prod)
+
+Ejemplo:
+
+```env id="l90k34"
+SECRET_KEY=mi_clave
+DB_NAME=django_db
+AWS_ACCESS_KEY_ID=xxxx
+```
+
+# 📦 Instalación
+
+```bash id="pgtb7y"
+pip install python-dotenv
+```
+
+Verificar:
+
+```bash id="smq95j"
+pip show python-dotenv
+```
+
+# 🧩 Cómo usarlo
+
+## 1. Crear archivo `.env`
+
+```env id="8g5rzi"
+DEBUG=True
+SECRET_KEY=clave_super_secreta
+```
+
+## 2. Cargar variables en Python
+
+```python id="5jk9ha"
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+secret = os.getenv("SECRET_KEY")
+
+print(secret)
+```
+
+# 🔹 Aplicarlo en Django
+
+## settings.py
+
+```python id="9jv59f"
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+SECRET_KEY = os.getenv("SECRET_KEY")
+DEBUG = os.getenv("DEBUG") == "True"
+```
+
+# ⚠️ Muy importante
+
+Agrega `.env` al `.gitignore`:
+
+```gitignore id="3tsdqp"
+.env
+```
+
+👉 Así evitas subir claves privadas a GitHub.
+
+# ✅ Ventajas principales
+
+* Seguridad
+* Configuración limpia
+* Fácil despliegue
+* Compatible con Docker y AWS
+
+
+# 🚀 Uso típico en producción
+
+Se usa para guardar:
+
+* Claves AWS
+* Tokens JWT
+* Contraseñas DB
+* API Keys
+* Configuración por entorno
+
+Ejemplo:
+
+```env id="h1j1mq"
+DATABASE_URL=postgresql://user:pass@host/db
+AWS_SECRET_ACCESS_KEY=xxxx
+```
