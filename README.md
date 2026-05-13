@@ -2096,7 +2096,7 @@ Agrega `.env` al `.gitignore`:
 * Compatible con Docker y AWS
 
 
-# 🚀 Uso típico en producción
+# 🚀 Uso típico en *producción*
 
 Se usa para guardar:
 
