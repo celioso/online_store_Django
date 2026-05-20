@@ -20,14 +20,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
+IS_PRODUCTION = os.enveron.get('DJANGO_PRODUCTION') == 1
+
+ENV_FILE = Path(__file__).resolve().parent.parent.parent / ('.env.production' if IS_PRODUCTION else '.env.development')
+load_dotenv(ENV_FILE)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-j6==158tncq(72c@v6qz4&2y*-fdv0u#zah_%e0_0^jvr&uaj^"
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+# Seguridad y depuración
+# ---------------------------------------------------
+SECRET_KEY = os.getenv('SECRET_KEY')
+DEBUG = os.getenv('DEBUG') == 'True'
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 
 
 # Application definition
@@ -83,9 +90,13 @@ WSGI_APPLICATION = "tienda_videojuegos.wsgi.application"
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': os.getenv('DATABASE_ENGINE'),
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USER', ''),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', ''),
+        'HOST': os.getenv('DATABASE_HOST', ''),
+        'PORT': os.getenv('DATABASE_PORT', ''),
     }
 }
 
