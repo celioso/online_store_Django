@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
-IS_PRODUCTION = os.enveron.get('DJANGO_PRODUCTION') == 1
+IS_PRODUCTION = os.environ.get('DJANGO_PRODUCTION') == 1
 
 ENV_FILE = Path(__file__).resolve().parent.parent.parent / ('.env.production' if IS_PRODUCTION else '.env.development')
 load_dotenv(ENV_FILE)
